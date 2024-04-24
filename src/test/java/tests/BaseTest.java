@@ -28,6 +28,10 @@ public class BaseTest {
 
     @AfterTest
     public void tearDown(){
-        driver.close();
+        // cierra solo la pagina actual
+        //driver.close();
+
+        // cierra todas las paginas que se abren al momento de la test
+        driver.quit();
     }
 }
