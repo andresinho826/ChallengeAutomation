@@ -1,11 +1,13 @@
 # Default ignored files
 /shelf/
+/.idea
 /workspace.xml
 *.class
 *.jar
 *.war
 *.ear
 out/
+.idea/
 ../target/
 *.iml
 *.ipr

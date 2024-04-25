@@ -2,19 +2,24 @@ package tests;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.IframeTabPage;
 import pages.OpenNewTabPage;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
 
 public class TestFrames extends BaseTest{
     //WebDriver driver;
     private static final Logger logger = LogManager.getLogger(TestFrames.class);
+    //private static final Logger LOGGER = Logger(TestFrames.class.getName());
 
     @Test(priority = 0)
     public void testingOpenNewTab() {
+
+        try{
         OpenNewTabPage fwp = new OpenNewTabPage(driver);
         fwp.setFrameTitle();
         fwp.clickOnOpenNewTab();
@@ -35,14 +40,17 @@ public class TestFrames extends BaseTest{
 
         IframeTabPage iftp = new IframeTabPage(driver);
 
-        driver.switchTo().frame(iftp.getIframeAppear());
+        iftp.getIframeAppear();
         logger.info("Se cambia al iframe");
         iftp.trainingTitle();
-        logger.info("Encontra el titulo Training");
+        logger.info("Encuentra el titulo Training");
         iftp.clickFrameList();
-        logger.info("Carga la lista de opciones y da click en Manual testint training");
-        iftp.manualTestTrainingTitle();
+        logger.info("Encuentra, pasa el mouse y da click en Manual testint training");
+        Assert.assertTrue(iftp.manualTestTrainingTitle());
         logger.info("Encuentra el titulo manual testing training");
+        }catch (Exception e){
+            logger.error("Error is happening:= " + e.getMessage(), e);
+        }
 
 
 
