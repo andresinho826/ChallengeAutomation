@@ -28,66 +28,77 @@ public class IframeTabPage extends BasePage{
     private List<WebElement> frameList;
 
     //@FindBy(css = "img[alt='Manual Online Testing Training']")
-    @FindBy(css = "a[href='https://www.globalsqa.com/training/manual-testing-training/']")
+    @FindBy(css = "//img[contains(@src,'ManalTestingTraining.jpg')]")
     private WebElement btnManualTestingFirst;
 
 
     //@FindBy(css = "a[href='https://www.globalsqa.com/training/manual-testing-training/']")
     //@FindBy(xpath= "//h3[contains(text(), 'Manual Testing Training')]")
     //@FindBy(xpath= "//iframe[contains(text(),'<br />')]")
-    @FindBy(xpath= "//h3[contains(text(), 'Manual Testing Training')]")
+    //img[contains(@src,'ManalTestingTraining.jpg')]
     //iframe[contains(text(),'<br />')]
+    //img[contains(@src,'SelenimTraining.jpg')]
+    //h3[contains(text(), 'Manual Testing Training')]
+
+    @FindBy(xpath= "//img[contains(@src,'SelenimTraining.jpg')]")
     private WebElement btnManualTestingSecond;
 
     @FindBy(xpath = "//h1[contains(text(), 'Manual Testing Training')]")
     private WebElement textManualTesting;
 
+    @FindBy(xpath = "//h1[contains(text(), 'Selenium 3.0 Training')]")
+    private WebElement textSeleniumTraining;
+
     @FindBy(css = "iframe[name='globalSqa']")
     private WebElement iframeAppear;
 
+    /*public void onlyClick(){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(btnManualTestingFirst).click().perform();
+        //btnManualTestingFirst.click();
+    }
+
+     */
+
     public boolean manualTestTrainingTitle(){
-        isFluentElementDisplayed(textManualTesting);
-        //isElementDisplayed(textManualTesting);
+        isFluentElementDisplayed(textSeleniumTraining);
         return true;
         //Assert.assertTrue(textManualTesting.isDisplayed());
+        //isElementDisplayed(textManualTesting);
     }
 
     public void getIframeAppear() {
         driver.switchTo().frame(iframeAppear);
     }
+    public void leftToFrame() {
+        driver.switchTo().defaultContent();
+    }
 
     public void clickFrameList(){
         isFluentElementDisplayed(btnManualTestingSecond);
         // Create an instance of Actions class
-
         Actions actions = new Actions(driver);
-
-        actions.sendKeys(Keys.PAGE_DOWN).build().perform();
+        WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(btnManualTestingSecond,0,-50);
+        actions.scrollFromOrigin(scrollOrigin, 0, 200);
         actions.moveToElement(btnManualTestingSecond).click().perform();
+        //driver.switchTo().defaultContent();
 
+        //actions.sendKeys(Keys.PAGE_DOWN).build().perform();
+        //actions.moveToElement(btnManualTestingSecond).click().perform();
+        //actions.sendKeys(Keys.PAGE_UP).build().perform();
         /*try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
-
-         */
-
-
+        }*/
         //int deltaY = btnManualTestingSecond.getRect().y;
         //actions.scrollByAmount(0,deltaY).perform();
-
-        //WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement(btnManualTestingSecond,10,10);
-        //actions.scrollFromOrigin(scrollOrigin, 0, 200);
-
-
         //actions.scrollToElement(btnManualTestingSecond).perform();
         //actions.scrollByAmount(0,500);
         //actions.scrollToElement(btnManualTestingSecond).perform();
         // Move the mouse cursor to the element
-        actions.sendKeys(Keys.PAGE_UP).build().perform();
-
         //actions.moveToElement(btnManualTestingSecond).sendKeys(Keys.ENTER).perform();
+
     }
 
     public boolean iframeAddIspresent(){
